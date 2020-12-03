@@ -1,0 +1,18 @@
+---
+-  hosts: all
+   become: yes
+   tasks:
+     - name: update and install nfs client
+       yum: name= "{{ item }}" state present
+       with_items:
+         - update
+         - nfs-utils
+
+     - name: set timezone to America/Phoenix
+       timezone:
+         name: America/Phoenix
+     
+     - name: install git
+       dnf:
+         name: git
+         state: latest
